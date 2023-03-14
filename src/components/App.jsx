@@ -1,4 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom'
 import { auth } from '../firebase';
 import Home from './Home';
@@ -15,13 +16,17 @@ import Login from './Login';
 
 function App() {
 
+  const [ user, setUser] = useState()
+
   const theUser = auth.currentUser
 
-  onAuthStateChanged(auth, (currentUser) => {})
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
 
   return (
     <main>      
-       {theUser 
+       {user
        ?  <Home />
        :  <Login />
       }
