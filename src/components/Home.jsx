@@ -1,11 +1,25 @@
-import React from "react";
-import MyCalendar from "./MyCalendar";
+import React, {useState} from "react";
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import Login from './Login.jsx'
+import TheCalendar from './TheCalendar.jsx'
 
+function Home() {
+    const [ user, setUser] = useState()
 
-function Home () {
+    const theUser = auth.currentUser
+  
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser)
+    })
 
     return (
-        <MyCalendar />
+        <div>
+        {user
+            ?  <TheCalendar />
+            :  <Login />
+           }
+        </div>
     )
 }
 

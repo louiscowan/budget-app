@@ -1,9 +1,6 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom'
-import { auth } from '../firebase';
+import { Route, Routes } from 'react-router-dom';
+import AddEventPage from './AddEventPage';
 import Home from './Home';
-import Login from './Login';
 
 // import { Provider } from 'react-redux';
 // import thunk from 'redux-thunk'
@@ -16,20 +13,12 @@ import Login from './Login';
 
 function App() {
 
-  const [ user, setUser] = useState()
-
-  const theUser = auth.currentUser
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  })
-
   return (
     <main>      
-       {user
-       ?  <Home />
-       :  <Login />
-      }
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/addEventPage/:date" element={<AddEventPage />} />
+      </Routes>
       </main>
   );
 }
