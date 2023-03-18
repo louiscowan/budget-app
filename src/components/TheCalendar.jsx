@@ -1,25 +1,35 @@
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
+import { db } from '../firebase';
 import '../styles/App.css';
 import AddEventPage from './AddEventPage';
-
-
 
 function TheCalendar() {
   const [events, setEvents] = useState([]);
   const [ clickedDate,  setClickedDate] = useState();
   const [ showForm,  setShowForm] = useState(false);
+  const [ unformatedDate,  setUnformatedDate] = useState(false);
+
+  const eventCollection = collection(db, 'budgeting-times')
 
   useEffect(() => {
-    const storedEvents = JSON.parse(localStorage.getItem('events')) || [];
-    setEvents(storedEvents);
+    const getEventTimes = async() => {
+      const eventTimes = await getDocs(eventCollection)
+      const storedEvents = [];
+      eventTimes.forEach((doc) => {
+        console.log({...doc.data(), id: doc.id })
+        storedEvents.push({...doc.data(), id: doc.id });
+      });
+      setEvents(storedEvents);
+    }
+    getEventTimes()
   }, []);
 
-  function handleDeleteEvent(index) {
-    const newEvents = events.filter((_, i) => i !== index);
-    setEvents(newEvents);
-
-    localStorage.setItem('events', JSON.stringify(newEvents));
+  async function handleDeleteEvent(id) {
+      const userDoc = doc(db, 'budeting-times', id)
+      await deleteDoc(userDoc)
+      window.location.reload()
   }
 
   function closeForm() {
@@ -27,41 +37,39 @@ function TheCalendar() {
   }
 
   function handleDayClicked(date) {
+    setUnformatedDate(date)
     setClickedDate(date.toLocaleDateString())
     setShowForm(true)
   }
 
   return (
-    <div className="App">
-      <h1>Calendar App</h1>
-        <div className="CalendarContainer">
+    <div class="calendar-app">
+      <h1 class="calendar-app-header">Calendar App</h1>
+      <div class="calendar-app-container">
+        <div class="calendar-app-calendar">
           <Calendar
-            onClickDay={(date) => handleDayClicked(date)}          
+            onClickDay={handleDayClicked}
             tileContent={({ date }) => {
-              const event = events.find((event) => event.date === date.toLocaleDateString());
-              if (event) {
-                return <span className="EventIndicator">{event.description}</span>;
+              const eventsForDay = events.filter((event) => event.date === date.toLocaleDateString());
+              if (eventsForDay.length > 0) {
+                console.log(eventsForDay)
+                return eventsForDay.map((event) => (
+                    <div key={event.id} class="calendar-app-event">
+                      <p>{event.eventTime}</p>
+                      <p>{event.description}</p>
+                      <p>{event.phoneNumber}</p>
+                    </div>
+                ));
               }
             }}
           />
-          <div className="EventList">
-            {events.length === 0 && <p>No events added yet</p>}
-            {events.map((event, index) => (
-              <div className="Event" key={index}>
-                <p className="EventDate">{event.date}</p>
-                <p className="EventDescription">{event.description}</p>
-                <p className="EventPhoneNumber">{event.phoneNumber}</p>
-                <button onClick={() => handleDeleteEvent(index)}>Delete</button>
-              </div>
-            ))}
-          </div>
         </div>
-        {showForm
-        ? <div>
-            <AddEventPage date={clickedDate} closeFormFunction={closeForm}/>
-          </div>   
-        :  null
-        }
+      </div>
+      {showForm ? (
+        <div class="calendar-app-add-event">
+          <AddEventPage date={clickedDate} events={events} unformatedDate={unformatedDate} closeFormFunction={closeForm} />
+        </div>
+      ) : null}
     </div>
   );
 }

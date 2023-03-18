@@ -1,16 +1,181 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore' ;
-import { ref } from "firebase/storage";
 import '../styles/App.css';
 
 
-function AddEventPage({date, closeFormFunction}) {
+export function BudgetingTimes({setTimeSlot, setEventTime, dayOfWeek}) {
+  console.log("hello", dayOfWeek)
+  if(dayOfWeek === 2) {
+    return <section>
+      <h3>Time Slot</h3>
+    <label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
+    <input 
+        type="radio"
+        id="9:30 - 10:30"
+        name="time-slot"
+        value="1"
+        onClick={(e) => {
+          setTimeSlot(e.target.value)
+          setEventTime("9:30 - 10:30")
+        }}
+        required        
+    />
+    <label htmlFor="10:30 - 11:30">10:30 - 11:30</label>
+    <input 
+        type="radio"
+        id="10:30 - 11:30"
+        name="time-slot"
+        value="2"
+         onClick={(e) => {
+          setTimeSlot(e.target.value)
+          setEventTime("10:30 - 11:30")
+        }}
+        required        
+    />
+    <label htmlFor="11:30 - 12:30">11:30 - 12:30</label>
+    <input 
+        type="radio"
+        id="11:30 - 12:30"
+        name="time-slot"
+        value="3"
+         onClick={(e) => {
+          setTimeSlot(e.target.value)
+          setEventTime("11:30 - 12:30")
+        }}
+        required        
+    />
+    <label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
+    <input 
+        type="radio"
+        id="12:30 - 1:30"
+        name="time-slot"
+        value="4"
+         onClick={(e) => {
+          setTimeSlot(e.target.value)
+          setEventTime("12:30 - 1:30")
+        }}
+        required        
+    />
+    </section>
+  } else if(dayOfWeek === 4) {
+    return <section>
+      <h3>Time Slot</h3>
+          <label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
+          <input 
+              type="radio"
+              id="9:30 - 10:30"
+              name="time-slot"
+              value="1"
+              onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("9:30 - 10:30")
+              }}
+              required        
+          />
+          <label htmlFor="10:30 - 11:30">10:30 - 11:30</label>
+          <input 
+              type="radio"
+              id="10:30 - 11:30"
+              name="time-slot"
+              value="2"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("10:30 - 11:30")
+              }}
+              required        
+          />
+          <label htmlFor="11:30 - 12:30">11:30 - 12:30</label>
+          <input 
+              type="radio"
+              id="11:30 - 12:30"
+              name="time-slot"
+              value="3"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("11:30 - 12:30")
+              }}
+              required        
+          />
+          <label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
+          <input 
+              type="radio"
+              id="12:30 - 1:30"
+              name="time-slot"
+              value="4"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("12:30 - 1:30")
+              }}
+              required        
+          />
+    </section>
+  } else if (dayOfWeek === 5) {
+    return <section>
+      <h3>Time Slot</h3>
+          <label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
+          <input 
+              type="radio"
+              id="9:30 - 10:30"
+              name="time-slot"
+              value="1"
+              onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("9:30 - 10:30")
+              }}
+              required        
+          />
+          <label htmlFor="10:30 - 11:30">10:30 - 11:30</label>
+          <input 
+              type="radio"
+              id="10:30 - 11:30"
+              name="time-slot"
+              value="2"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("10:30 - 11:30")
+              }}
+              required        
+          />
+          <label htmlFor="11:30 - 12:30">11:30 - 12:30</label>
+          <input 
+              type="radio"
+              id="11:30 - 12:30"
+              name="time-slot"
+              value="3"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("11:30 - 12:30")
+              }}
+              required        
+          />
+          <label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
+          <input 
+              type="radio"
+              id="12:30 - 1:30"
+              name="time-slot"
+              value="4"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("12:30 - 1:30")
+              }}
+              required        
+          />
+    </section>
+  } else {
+    return<></>
+  }
+}
+
+function AddEventPage({date, closeFormFunction, events, unformatedDate}) {
   const [   description, setDescription ] = useState("");
   const [   phoneNumber, setPhoneNumber ] = useState("");
   const [   timeSlot, setTimeSlot   ] = useState("");
+  const [   eventTime, setEventTime   ] = useState("");
 
-    const budgetingTimesRef = collection(db, 'budgeting-times')
+  const budgetingTimesRef = collection(db, 'budgeting-times')
+
+ const dayOfWeek = unformatedDate.getDay()
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,8 +188,10 @@ function AddEventPage({date, closeFormFunction}) {
         description: description,
         phoneNumber: phoneNumber,
         timeSlot: timeSlot,
-        date: date
+        date: date,
+        eventTime: eventTime,
     })
+    window.location.reload()
   }
 
   return (
@@ -54,65 +221,12 @@ function AddEventPage({date, closeFormFunction}) {
           />
         </label>
         <br />
-        <section>
-            <h3>Time Slot</h3>
-            <label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
-            <input 
-                type="radio"
-                id="9:30 - 10:30"
-                name="time-slot"
-                value="1"
-                onClick={(e) => {setTimeSlot(e.target.value)}}
-                required        
-            />
-            <label htmlFor="10:30 - 11:30">10:30 - 11:30</label>
-            <input 
-                type="radio"
-                id="10:30 - 11:30"
-                name="time-slot"
-                value="2"
-                onClick={(e) => {setTimeSlot(e.target.value)}}
-                required        
-            />
-            <label htmlFor="11:30 - 12:30">11:30 - 12:30</label>
-            <input 
-                type="radio"
-                id="11:30 - 12:30"
-                name="time-slot"
-                value="3"
-                onClick={(e) => {setTimeSlot(e.target.value)}}
-                required        
-            />
-            <label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
-            <input 
-                type="radio"
-                id="12:30 - 1:30"
-                name="time-slot"
-                value="4"
-                onClick={(e) => {setTimeSlot(e.target.value)}}
-                required        
-            />
-            <label htmlFor="1:30 - 2:30">1:30 - 2:30</label>
-            <input 
-                type="radio"
-                id="1:30 - 2:30"
-                name="time-slot"
-                value="5"
-                onClick={(e) => {setTimeSlot(e.target.value)}}
-                required        
-            />
-            <label htmlFor="2:30 - 3:30">2:30 - 3:30</label>
-            <input 
-                type="radio"
-                id="2:30 - 3:30"
-                name="time-slot"
-                value="6"
-                onClick={(e) => {setTimeSlot(e.target.value)}}
-                required        
-            />
-        </section>
+        <BudgetingTimes setTimeSlot={setTimeSlot} setEventTime={setEventTime} dayOfWeek={dayOfWeek}/>
         <button type="submit">Add Event</button>
       </form>
+      <button onClick={() => {
+        closeFormFunction()
+      }}>Cancel</button>
     </div>
   );
 }
