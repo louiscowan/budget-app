@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, doc, deleteDoc } from 'firebase/firestore' ;
 import '../styles/App.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOfWeek}) {
@@ -168,14 +169,22 @@ function AddEventPage({date, closeFormFunction, events, unformatedDate}) {
     window.location.reload()
   }
 
+  useEffect(() => {
+    const eventsForDay = events.filter((event) => event.date === date);
+    setFilteredEvents(eventsForDay)
+  }, [])
+
   async function deleteBooking(id) {
-    const userDoc = doc(db, 'budgeting-times', id)
-    await deleteDoc(userDoc)
-    window.location.reload()
+    const confirmed = window.confirm("Are you sure you want to delete this booking?");
+    if (confirmed) {
+      const userDoc = doc(db, 'budgeting-times', id);
+      await deleteDoc(userDoc);
+      window.location.reload();
+    }
   }
 
   return (
-    <div>
+    <div className="form">
       <button className="backButton" onClick={() => closeFormFunction()}>Back</button>
     <div className='filteredEventsList'>
       {
