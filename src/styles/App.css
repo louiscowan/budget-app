@@ -149,3 +149,11 @@ h2 {
   background-color: #3e8e41;
 }
 
+.backButton {
+  padding: 10px;
+  background-color: rgb(86, 86, 250);
+  color: white;
+  border-radius: 6px;
+  font-size: large;
+  cursor: pointer;
+}

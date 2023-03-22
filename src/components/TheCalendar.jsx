@@ -36,6 +36,20 @@ function TheCalendar() {
     setShowForm(true)
   }
 
+  function getEventForTimeSlot(events, timeSlot) {
+    const event = events.find((event) => event.eventTime === timeSlot);
+    if (event) {
+      return (
+        <div>
+          <p>{event.eventTime}</p>
+          <p>{event.description}</p>
+          <p>{event.phoneNumber}</p>
+        </div>
+      );
+    }
+    return null;
+  }
+
   return (
     <div class="calendar-app">
       <h1 class="calendar-app-header">Calendar App</h1>
@@ -44,14 +58,41 @@ function TheCalendar() {
           <Calendar
             onClickDay={handleDayClicked}
             tileContent={({ date }) => {
+              const dayOfWeek = date.getDay();
               const eventsForDay = events.filter((event) => event.date === date.toLocaleDateString());
-              if (eventsForDay.length > 0) {
+              if (dayOfWeek === 2 || dayOfWeek === 4) {
+                // create and return an array of pre-existing event blocks for Tuesday and Thursday
+                return [
+                  <div key="1" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "9:30 - 10:30") || <p>9:30 - 10:30</p>}
+                  </div>,
+                  <div key="2" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "10:30 - 11:30") || <p>10:30 - 11:30</p>}
+                  </div>,
+                  <div key="3" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "11:30 - 12:30") || <p>11:30 - 12:30</p>}
+                  </div>,
+                ];
+              } else if (dayOfWeek === 5) {
+                // create and return an array of pre-existing event blocks for Friday
+                return [
+                  <div key="1" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "9:45 - 10:45") || <p>9:45 - 10:45</p>}
+                  </div>,
+                  <div key="2" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "10:45 - 11:45") || <p>10:45 - 11:45</p>}
+                  </div>,
+                  <div key="3" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "11:45 - 12:45") || <p>11:45 - 12:45</p>}
+                  </div>,
+                ];
+              } else if (eventsForDay.length > 0) {
                 return eventsForDay.map((event) => (
-                    <div key={event.id} class="calendar-app-event">
-                      <p>{event.eventTime}</p>
-                      <p>{event.description}</p>
-                      <p>{event.phoneNumber}</p>
-                    </div>
+                  <div key={event.id} class="calendar-app-event">
+                    <p>{event.eventTime}</p>
+                    <p>{event.description}</p>
+                    <p>{event.phoneNumber}</p>
+                  </div>
                 ));
               }
             }}

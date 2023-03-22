@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, doc, deleteDoc } from 'firebase/firestore' ;
 import '../styles/App.css';
+import { useNavigate } from 'react-router-dom';
 
 
 export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOfWeek}) {
@@ -207,8 +208,6 @@ function AddEventPage({date, closeFormFunction, events, unformatedDate}) {
     window.location.reload()
   }
 
-
-
   useEffect(() => {
     const eventsForDay = events.filter((event) => event.date === date);
     console.log(eventsForDay)
@@ -223,6 +222,7 @@ function AddEventPage({date, closeFormFunction, events, unformatedDate}) {
 
   return (
     <div>
+      <button className="backButton" onClick={() => closeFormFunction()}>Back</button>
     <div className='filteredEventsList'>
       {
         filteredEvents?.map((event) => {
