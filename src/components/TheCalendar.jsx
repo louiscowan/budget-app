@@ -64,26 +64,26 @@ function TheCalendar() {
                 // create and return an array of pre-existing event blocks for Tuesday and Thursday
                 return [
                   <div key="1" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "9:30 - 10:30") || <p>9:30 - 10:30</p>}
+                    {getEventForTimeSlot(eventsForDay, "9:30 - 10:30") || <div><p>9:30 - 10:30</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                   <div key="2" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "10:30 - 11:30") || <p>10:30 - 11:30</p>}
+                    {getEventForTimeSlot(eventsForDay, "10:30 - 11:30") || <div><p>10:30 - 11:30</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                   <div key="3" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "11:30 - 12:30") || <p>11:30 - 12:30</p>}
+                    {getEventForTimeSlot(eventsForDay, "11:30 - 12:30") || <div><p>11:30 - 12:30</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                 ];
               } else if (dayOfWeek === 5) {
                 // create and return an array of pre-existing event blocks for Friday
                 return [
                   <div key="1" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "9:45 - 10:45") || <p>9:45 - 10:45</p>}
+                    {getEventForTimeSlot(eventsForDay, "9:45 - 10:45") || <div><p>9:45 - 10:45</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                   <div key="2" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "10:45 - 11:45") || <p>10:45 - 11:45</p>}
+                    {getEventForTimeSlot(eventsForDay, "10:45 - 11:45") || <div><p>10:45 - 11:45</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                   <div key="3" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "11:45 - 12:45") || <p>11:45 - 12:45</p>}
+                    {getEventForTimeSlot(eventsForDay, "11:45 - 12:45") || <div><p>11:45 - 12:45</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                 ];
               } else if (eventsForDay.length > 0) {

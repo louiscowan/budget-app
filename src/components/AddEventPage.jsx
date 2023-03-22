@@ -276,7 +276,6 @@ function AddEventPage({date, closeFormFunction, events, unformatedDate}) {
     closeFormFunction()
   }}>Cancel</button>
 </div>
-
     </div>
   );
 }
