@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, doc, deleteDoc } from 'firebase/firestore' ;
 import '../styles/App.css';
-import { useNavigate } from 'react-router-dom';
 
 
 export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOfWeek}) {
@@ -49,21 +48,8 @@ export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOf
         required        
     />
     </div>
-    <div className="choose-time"><label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
-    <input 
-        type="radio"
-        id="12:30 - 1:30"
-        name="time-slot"
-        value="4"
-         onClick={(e) => {
-          setTimeSlot(e.target.value)
-          setEventTime("12:30 - 1:30")
-        }}
-        required        
-    />
-    </div>
     </section>
-  } else if(dayOfWeek === 4) {
+  } else if(dayOfWeek === 3) {
     return <section className="time-slot-section">
       <h3>Time Slot</h3>
           <div className="choose-time"><label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
@@ -101,19 +87,6 @@ export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOf
                onClick={(e) => {
                 setTimeSlot(e.target.value)
                 setEventTime("11:30 - 12:30")
-              }}
-              required        
-          />
-          </div>
-          <div className="choose-time"><label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
-          <input 
-              type="radio"
-              id="12:30 - 1:30"
-              name="time-slot"
-              value="4"
-               onClick={(e) => {
-                setTimeSlot(e.target.value)
-                setEventTime("12:30 - 1:30")
               }}
               required        
           />
@@ -161,19 +134,6 @@ export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOf
               required        
           />
           </div>
-          <div className="choose-time"><label htmlFor="12:30 - 1:30">12:30 - 1:30</label>
-          <input 
-              type="radio"
-              id="12:30 - 1:30"
-              name="time-slot"
-              value="4"
-               onClick={(e) => {
-                setTimeSlot(e.target.value)
-                setEventTime("12:30 - 1:30")
-              }}
-              required        
-          />
-          </div>
     </section>
   } else {
     return<></>
@@ -207,12 +167,6 @@ function AddEventPage({date, closeFormFunction, events, unformatedDate}) {
     })
     window.location.reload()
   }
-
-  useEffect(() => {
-    const eventsForDay = events.filter((event) => event.date === date);
-    console.log(eventsForDay)
-    setFilteredEvents(eventsForDay)
-  }, [])
 
   async function deleteBooking(id) {
     const userDoc = doc(db, 'budgeting-times', id)

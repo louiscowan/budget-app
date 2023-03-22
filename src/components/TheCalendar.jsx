@@ -60,7 +60,7 @@ function TheCalendar() {
             tileContent={({ date }) => {
               const dayOfWeek = date.getDay();
               const eventsForDay = events.filter((event) => event.date === date.toLocaleDateString());
-              if (dayOfWeek === 2 || dayOfWeek === 4) {
+              if (dayOfWeek === 2 || dayOfWeek === 5) {
                 // create and return an array of pre-existing event blocks for Tuesday and Thursday
                 return [
                   <div key="1" class="calendar-app-event">
@@ -73,7 +73,7 @@ function TheCalendar() {
                     {getEventForTimeSlot(eventsForDay, "11:30 - 12:30") || <div><p>11:30 - 12:30</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                 ];
-              } else if (dayOfWeek === 5) {
+              } else if (dayOfWeek === 3) {
                 // create and return an array of pre-existing event blocks for Friday
                 return [
                   <div key="1" class="calendar-app-event">
