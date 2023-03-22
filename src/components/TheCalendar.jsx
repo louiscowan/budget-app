@@ -26,12 +26,6 @@ function TheCalendar() {
     getEventTimes()
   }, []);
 
-  async function handleDeleteEvent(id) {
-      const userDoc = doc(db, 'budeting-times', id)
-      await deleteDoc(userDoc)
-      window.location.reload()
-  }
-
   function closeForm() {
     setShowForm(false)
   }
@@ -52,7 +46,6 @@ function TheCalendar() {
             tileContent={({ date }) => {
               const eventsForDay = events.filter((event) => event.date === date.toLocaleDateString());
               if (eventsForDay.length > 0) {
-                console.log(eventsForDay)
                 return eventsForDay.map((event) => (
                     <div key={event.id} class="calendar-app-event">
                       <p>{event.eventTime}</p>
