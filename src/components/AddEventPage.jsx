@@ -53,41 +53,41 @@ export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOf
   } else if(dayOfWeek === 3) {
     return <section className="time-slot-section">
       <h3>Time Slot</h3>
-          <div className="choose-time"><label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
+          <div className="choose-time"><label htmlFor="9:45 - 10:45">9:45 - 10:45</label>
           <input 
               type="radio"
-              id="9:30 - 10:30"
+              id="9:45 - 10:45"
               name="time-slot"
               value="1"
               onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("9:30 - 10:30")
+                setEventTime("9:45 - 10:45")
               }}
               required        
           />
           </div>
-          <div className="choose-time"><label htmlFor="10:30 - 11:30">10:30 - 11:30</label>
+          <div className="choose-time"><label htmlFor="10:45 - 11:45">10:45 - 11:45</label>
           <input 
               type="radio"
-              id="10:30 - 11:30"
+              id="10:45 - 11:45"
               name="time-slot"
               value="2"
                onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("10:30 - 11:30")
+                setEventTime("10:45 - 11:45")
               }}
               required        
           />
           </div>
-          <div className="choose-time"><label htmlFor="11:30 - 12:30">11:30 - 12:30</label>
+          <div className="choose-time"><label htmlFor="11:45 - 12:45">11:45 - 12:45</label>
           <input 
               type="radio"
-              id="11:30 - 12:30"
+              id="11:45 - 12:45"
               name="time-slot"
               value="3"
                onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("11:30 - 12:30")
+                setEventTime("11:45 - 12:45")
               }}
               required        
           />
@@ -96,28 +96,28 @@ export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOf
   } else if (dayOfWeek === 5) {
     return <section className="time-slot-section">
       <h3>Time Slot</h3>
-          <div className="choose-time"><label htmlFor="9:30 - 10:30">9:30 - 10:30</label>
+          <div className="choose-time"><label htmlFor="9:45 - 10:45">9:45 - 10:45</label>
           <input 
               type="radio"
-              id="9:30 - 10:30"
+              id="9:45 - 10:45"
               name="time-slot"
               value="1"
               onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("9:30 - 10:30")
+                setEventTime("9:45 - 10:45")
               }}
               required        
           />
           </div>
-          <div className="choose-time"><label htmlFor="10:30 - 11:30">10:30 - 11:30</label>
+          <div className="choose-time"><label htmlFor="10:45 - 11:45">10:45 - 11:45</label>
           <input 
               type="radio"
-              id="10:30 - 11:30"
+              id="10:45 - 11:45"
               name="time-slot"
               value="2"
                onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("10:30 - 11:30")
+                setEventTime("10:45 - 11:45")
               }}
               required        
           />
