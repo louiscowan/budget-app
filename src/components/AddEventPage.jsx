@@ -53,41 +53,54 @@ export function BudgetingTimes({filteredEvents, setTimeSlot, setEventTime, dayOf
   } else if(dayOfWeek === 3) {
     return <section className="time-slot-section">
       <h3>Time Slot</h3>
-          <div className="choose-time"><label htmlFor="9:45 - 10:45">9:45 - 10:45</label>
+          <div className="choose-time"><label htmlFor="10:30 - 11:15">10:30 - 11:15</label>
           <input 
               type="radio"
-              id="9:45 - 10:45"
+              id="10:30 - 11:15"
               name="time-slot"
               value="1"
               onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("9:45 - 10:45")
+                setEventTime("10:30 - 11:15")
               }}
               required        
           />
           </div>
-          <div className="choose-time"><label htmlFor="10:45 - 11:45">10:45 - 11:45</label>
+          <div className="choose-time"><label htmlFor="11:15 - 12:00">11:15 - 12:00</label>
           <input 
               type="radio"
-              id="10:45 - 11:45"
+              id="11:15 - 12:00"
               name="time-slot"
               value="2"
                onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("10:45 - 11:45")
+                setEventTime("11:15 - 12:00")
               }}
               required        
           />
           </div>
-          <div className="choose-time"><label htmlFor="11:45 - 12:45">11:45 - 12:45</label>
+          <div className="choose-time"><label htmlFor="12:00 - 1:00">12:00 - 1:00</label>
           <input 
               type="radio"
-              id="11:45 - 12:45"
+              id="12:00 - 1:00"
               name="time-slot"
               value="3"
                onClick={(e) => {
                 setTimeSlot(e.target.value)
-                setEventTime("11:45 - 12:45")
+                setEventTime("12:00 - 1:00")
+              }}
+              required        
+          />
+          </div>
+          <div className="choose-time"><label htmlFor="1:00 - 2:00">1:00 - 2:00</label>
+          <input 
+              type="radio"
+              id="1:00 - 2:00"
+              name="time-slot"
+              value="3"
+               onClick={(e) => {
+                setTimeSlot(e.target.value)
+                setEventTime("1:00 - 2:00")
               }}
               required        
           />

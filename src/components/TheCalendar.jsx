@@ -77,14 +77,17 @@ function TheCalendar() {
                 // create and return an array of pre-existing event blocks for Friday
                 return [
                   <div key="1" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "9:45 - 10:45") || <div><p>9:45 - 10:45</p><p style={{color: "green"}}>Available</p></div>}
+                    {getEventForTimeSlot(eventsForDay, "10:30 - 11:15") || <div><p>10:30 - 11:15</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                   <div key="2" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "10:45 - 11:45") || <div><p>10:45 - 11:45</p><p style={{color: "green"}}>Available</p></div>}
+                    {getEventForTimeSlot(eventsForDay, "11:15 - 12:00") || <div><p>11:15 - 12:00</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
                   <div key="3" class="calendar-app-event">
-                    {getEventForTimeSlot(eventsForDay, "11:45 - 12:45") || <div><p>11:45 - 12:45</p><p style={{color: "green"}}>Available</p></div>}
+                    {getEventForTimeSlot(eventsForDay, "12:00 - 1:00") || <div><p>12:00 - 1:00</p><p style={{color: "green"}}>Available</p></div>}
                   </div>,
+                  <div key="3" class="calendar-app-event">
+                  {getEventForTimeSlot(eventsForDay, "1:00 - 2:00") || <div><p>1:00 - 2:00</p><p style={{color: "green"}}>Available</p></div>}
+                </div>,
                 ];
               } else if (eventsForDay.length > 0) {
                 return eventsForDay.map((event) => (
