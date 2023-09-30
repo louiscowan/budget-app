@@ -18,7 +18,6 @@ function TheCalendar() {
       const eventTimes = await getDocs(eventCollection)
       const storedEvents = [];
       eventTimes.forEach((doc) => {
-        console.log({...doc.data(), id: doc.id })
         storedEvents.push({...doc.data(), id: doc.id });
       });
       setEvents(storedEvents);
@@ -31,9 +30,14 @@ function TheCalendar() {
   }
 
   function handleDayClicked(date) {
-    setUnformatedDate(date)
-    setClickedDate(date.toLocaleDateString())
-    setShowForm(true)
+    const day = date.getDay()
+    if(day == 1 || day == 4 || day == 6 || day == 0) {
+      return
+    } else {
+      setUnformatedDate(date)
+      setClickedDate(date.toLocaleDateString())
+      setShowForm(true)
+    }
   }
 
   function getEventForTimeSlot(events, timeSlot) {
@@ -52,7 +56,6 @@ function TheCalendar() {
 
   return (
     <div class="calendar-app">
-      <h1 class="calendar-app-header">Calendar App</h1>
       <div class="calendar-app-container">
         <div class="calendar-app-calendar">
           <Calendar
@@ -60,7 +63,7 @@ function TheCalendar() {
             tileContent={({ date }) => {
               const dayOfWeek = date.getDay();
               const eventsForDay = events.filter((event) => event.date === date.toLocaleDateString());
-              if (dayOfWeek === 2 || dayOfWeek === 5) {
+              if (dayOfWeek === 2) {
                 // create and return an array of pre-existing event blocks for Tuesday and Thursday
                 return [
                   <div key="1" class="calendar-app-event">
@@ -88,6 +91,19 @@ function TheCalendar() {
                   <div key="3" class="calendar-app-event">
                   {getEventForTimeSlot(eventsForDay, "1:00 - 2:00") || <div><p>1:00 - 2:00</p><p style={{color: "green"}}>Available</p></div>}
                 </div>,
+                ];
+              } else if (dayOfWeek === 5) {
+                // create and return an array of pre-existing event blocks for Friday
+                return [
+                  <div key="1" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "9:45 - 10:45") || <div><p>9:45 - 10:45</p><p style={{color: "green"}}>Available</p></div>}
+                  </div>,
+                  <div key="2" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "10:45 - 11:45") || <div><p>10:45 - 11:45</p><p style={{color: "green"}}>Available</p></div>}
+                  </div>,
+                  <div key="3" class="calendar-app-event">
+                    {getEventForTimeSlot(eventsForDay, "11:30 - 12:30") || <div><p>11:30 - 12:30</p><p style={{color: "green"}}>Available</p></div>}
+                  </div>,
                 ];
               } else if (eventsForDay.length > 0) {
                 return eventsForDay.map((event) => (
